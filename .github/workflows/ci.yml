@@ -1,4 +1,4 @@
-name: CI Workflow
+name: Push Verify
 
 on:
   push:
@@ -7,19 +7,14 @@ on:
 
 jobs:
   build:
-    name: CI Workflow
+    name: Push Verify
     runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v4
+        uses: brynnaleslie/reusableworkflows/.github/workflows/reusable-build.yml@main
+
         with:
           dotnet-version: 9.0.x
-
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
-
-      - name: Test
-        run: dotnet test --configuration Release --no-build
